@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Profile</title>
     <style>
         body {
             display: flex;
@@ -12,10 +12,17 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #a3b8c8;
+            background-color: #2e2e2e;
+            color: #ddd;
         }
 
-        div {
+        .profile-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
             text-align: center;
         }
 
@@ -27,24 +34,23 @@
         }
 
         p {
-            background-color: #ffffff;
-            font-size: 30px;
-            margin: 13px 0;
+            background-color: #f4f4f9;
+            font-size: 20px;
+            margin: 10px 0;
             padding: 10px;
-            padding-left: 60px;
-            padding-right: 60px;
             border-radius: 8px;
+            color: #333;
         }
     </style>
 </head>
 
 <body>
 
-    <div>
+    <div class="profile-container">
         <img src="https://media.licdn.com/dms/image/v2/D5603AQFlPkvSgGhTGw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1719026457744?e=2147483647&v=beta&t=po9_V9fcWCZALyGvmEdo8xbPD1cOmGk9GVMlAMDsiTQ" alt="Profile Picture">
-        <p>Fuad Hamidan</p>
-        <p>A</p>
-        <p>2257051025</p>
+        <p>Nama: {{ $nama }}</p>
+        <p>Kelas: {{ $kelas }}</p>
+        <p>NPM: {{ $npm }}</p>
     </div>
 
 </body>
