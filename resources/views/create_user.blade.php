@@ -76,7 +76,11 @@
         <input type="text" id="npm" name="npm" required>
         <br>
         <label for="kelas">Kelas:</label>
-        <input type="text" id="kelas" name="kelas" required>
+        <select id="kelas" name="kelas" required>
+            @foreach ($kelas as $kelasItem)
+            <option value="{{$kelasItem->id}}">{{$kelasItem->nama_kelas}}</option>            
+            @endforeach
+        </select>
         <br>
         <button type="submit">Submit</button>
     </form>
