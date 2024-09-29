@@ -70,19 +70,29 @@
     <form action="{{ route('user.store') }}" method="POST">
         @csrf
         <label for="nama">Nama:</label>
-        <input type="text" id="nama" name="nama" required>
+        <input type="text" id="nama" name="nama" value="{{ old('nama') }}" required>
+
+        <p class="text-muted">Silakan masukkan nama lengkap Anda.</p>
         <br>
+
         <label for="npm">NPM:</label>
-        <input type="text" id="npm" name="npm" required>
+        <input type="text" id="npm" name="npm" value="{{ old('npm') }}" required>
+
+        <p class="text-muted">Silahkan masukan NPM anda.</p>
         <br>
+
         <label for="kelas">Kelas:</label>
-        <select id="kelas" name="kelas" required>
+        <select id="kelas" name="kelas_id" required>
             @foreach ($kelas as $kelasItem)
-            <option value="{{$kelasItem->id}}">{{$kelasItem->nama_kelas}}</option>            
+            <option value="{{ $kelasItem->id }}" {{ old('kelas_id') == $kelasItem->id ? 'selected' : '' }}>{{ $kelasItem->nama_kelas }}</option>
             @endforeach
         </select>
+
+        <p class="text-muted">Pilih kelas yang sesuai.</p>
         <br>
+
         <button type="submit">Submit</button>
+
     </form>
 </body>
 
