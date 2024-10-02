@@ -65,8 +65,11 @@
     </style>
 </head>
 
-<body>
-    <h1>Buat Profile Anda</h1>
+@extends('layouts.app')
+
+@section('content')
+<div>
+<h1>Buat Profile Anda</h1>
     <form action="{{ route('user.store') }}" method="POST">
         @csrf
         <label for="nama">Nama:</label>
@@ -94,6 +97,7 @@
         <button type="submit">Submit</button>
 
     </form>
-</body>
+</div>
+@endsection
 
 </html>
