@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        .user-table {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 @extends('layouts.app')
 
 @section('content')
 <div class="container">
-    <h1 class="title">Daftar User</h1>
+    <a href="{{ route('users.create') }}" class="btn-custom">Tambah Pengguna Baru</a>
     <table class="user-table">
         <thead>
             <tr>
@@ -22,12 +42,13 @@
         </thead>
         <tbody>
             @foreach($users as $user)
-                <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->nama }}</td>
-                    <td>{{ $user->npm }}</td>
-                    <td>{{ $user->nama_kelas }}</td>
-                </tr>
+            <tr>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->nama }}</td>
+                <td>{{ $user->npm }}</td>
+                <td>{{ $user->nama_kelas }}</td>
+                <td><a href="{{route('users.show', $user->id)}}" class="btn btn-warning mb-3">Detail</a></td>
+            </tr>
             @endforeach
         </tbody>
     </table>
@@ -57,7 +78,8 @@
         margin-bottom: 20px;
     }
 
-    .user-table th, .user-table td {
+    .user-table th,
+    .user-table td {
         border: 1px solid #ddd;
         padding: 12px 15px;
         text-align: left;
@@ -78,7 +100,9 @@
     }
 
     @media screen and (max-width: 768px) {
-        .user-table th, .user-table td {
+
+        .user-table th,
+        .user-table td {
             padding: 10px;
             font-size: 14px;
         }

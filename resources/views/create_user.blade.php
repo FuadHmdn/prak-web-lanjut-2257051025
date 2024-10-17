@@ -70,7 +70,7 @@
 @section('content')
 <div>
 <h1>Buat Profile Anda</h1>
-    <form action="{{ route('user.store') }}" method="POST">
+    <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <label for="nama">Nama:</label>
         <input type="text" id="nama" name="nama" value="{{ old('nama') }}" required>
@@ -93,6 +93,9 @@
 
         <p class="text-muted">Pilih kelas yang sesuai.</p>
         <br>
+
+        <label for="foto">foto:</label><br>
+        <input type="file" id="foto" name="foto"><br><br>
 
         <button type="submit">Submit</button>
 
