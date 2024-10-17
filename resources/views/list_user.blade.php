@@ -38,6 +38,9 @@
                 <th>Nama</th>
                 <th>NPM</th>
                 <th>Kelas</th>
+                <th>Foto</th>
+                <th>Menu</th>
+                <th>Detail</th>
             </tr>
         </thead>
         <tbody>
@@ -47,6 +50,20 @@
                 <td>{{ $user->nama }}</td>
                 <td>{{ $user->npm }}</td>
                 <td>{{ $user->nama_kelas }}</td>
+                <td>
+                    <img src="{{(''. $user->foto)}}" alt="Foro User" width="100">
+                </td>
+                <td>
+                    <a href="{{route('users.show', $user->id)}}" class="btn btn-primary btn-sm">View</a>
+                    <a href="{{route('users.edit', $user->id)}}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{route('users.destroy', $user->id)}}" method="post" style="display:inline-block">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submin" class="btn btn-danger btn-sm"
+                            onclick="return cnofirm('Apakah anda yakin ingin menghapus user ini?')">Delete
+                        </button>
+                    </form>
+                </td>
                 <td><a href="{{route('users.show', $user->id)}}" class="btn btn-warning mb-3">Detail</a></td>
             </tr>
             @endforeach
