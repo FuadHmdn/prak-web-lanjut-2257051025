@@ -48,9 +48,9 @@
 
     <div class="profile-container">
         <img src="https://media.licdn.com/dms/image/v2/D5603AQFlPkvSgGhTGw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1719026457744?e=2147483647&v=beta&t=po9_V9fcWCZALyGvmEdo8xbPD1cOmGk9GVMlAMDsiTQ" alt="Profile Picture">
-        <p>Nama: {{ $nama }}</p>
-        <p>Kelas: {{ $nama_kelas ?? 'Kelas Tidak Ditemukan' }}</p>
-        <p>NPM: {{ $npm }}</p>
+        <p>Nama: {{ $user->nama }}</p>
+        <p>Kelas: {{ $user->nama_kelas ?? 'Kelas Tidak Ditemukan' }}</p>
+        <p>NPM: {{ $user->npm }}</p>
     </div>
 
 </body>
