@@ -73,6 +73,38 @@ class UserController extends Controller
         return redirect()->to('/user')->with('success', 'User berhasil ditambahkan');
     }
 
+    // public function store(UserRequest $request)
+    // {
+    //     // Validasi input 
+    //     $request->validate([
+    //         'nama' => 'required',
+    //         'npm' => 'required',
+    //         'kelas_id' => 'required',
+    //         'foto' => 'image|file|max:2048', // Validasi foto 
+    //     ]);
+
+    //     // Proses upload foto 
+    //     if ($request->hasFile('foto')) {
+    //         $file = $request->file('foto');
+    //         $filename = time() . '_' . $file->getClientOriginalName();
+
+    //         // Simpan di folder 'uploads' di dalam 'public' 
+    //         $file->storeAs('public/uploads', $filename);
+
+    //         // Simpan data user ke database 
+    //         $this->userModel->create([
+    //             'nama' => $request->input('nama'),
+    //             'npm' => $request->input('npm'),
+    //             'kelas_id' => $request->input('kelas_id'),
+    //             'foto' => 'storage/uploads/' . $filename, // Path untuk URL publik
+    //         ]);
+    //     }
+
+    //     return redirect()->to('/user')->with('success', 'User Berhasil dibuat');
+    // }
+
+
+
     public function show($id)
     {
         $user = $this->userModel->getUser($id);
