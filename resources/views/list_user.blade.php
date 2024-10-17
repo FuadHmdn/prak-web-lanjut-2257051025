@@ -20,8 +20,92 @@
             color: white;
         }
 
+        .btn {
+            padding: 8px 12px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
         .user-table {
             margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .user-table th,
+        .user-table td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .user-table th {
+            background-color: #007bff;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .user-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .user-table tr:hover {
+            background-color: #ddd;
+        }
+
+        @media screen and (max-width: 768px) {
+            .user-table th,
+            .user-table td {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
         }
     </style>
 </head>
@@ -40,7 +124,6 @@
                 <th>Kelas</th>
                 <th>Foto</th>
                 <th>Menu</th>
-                <th>Detail</th>
             </tr>
         </thead>
         <tbody>
@@ -51,80 +134,24 @@
                 <td>{{ $user->npm }}</td>
                 <td>{{ $user->nama_kelas }}</td>
                 <td>
-                    <img src="{{(''. $user->foto)}}" alt="Foro User" width="100">
+                    <img src="{{ asset($user->foto) }}" alt="Foto User" width="100">
                 </td>
                 <td>
-                    <a href="{{route('users.show', $user->id)}}" class="btn btn-primary btn-sm">View</a>
-                    <a href="{{route('users.edit', $user->id)}}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{route('users.destroy', $user->id)}}" method="post" style="display:inline-block">
+                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary btn-sm">View</a>
+                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('users.destroy', $user->id) }}" method="post" style="display:inline-block">
                         @csrf
                         @method('DELETE')
-                        <button type="submin" class="btn btn-danger btn-sm"
-                            onclick="return cnofirm('Apakah anda yakin ingin menghapus user ini?')">Delete
+                        <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Apakah anda yakin ingin menghapus user ini?')">Delete
                         </button>
                     </form>
                 </td>
-                <td><a href="{{route('users.show', $user->id)}}" class="btn btn-warning mb-3">Detail</a></td>
             </tr>
             @endforeach
         </tbody>
     </table>
 </div>
-
-<style>
-    .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .title {
-        text-align: center;
-        margin-bottom: 20px;
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-    }
-
-    .user-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
-
-    .user-table th,
-    .user-table td {
-        border: 1px solid #ddd;
-        padding: 12px 15px;
-        text-align: left;
-    }
-
-    .user-table th {
-        background-color: #007bff;
-        color: white;
-        text-transform: uppercase;
-    }
-
-    .user-table tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-
-    .user-table tr:hover {
-        background-color: #ddd;
-    }
-
-    @media screen and (max-width: 768px) {
-
-        .user-table th,
-        .user-table td {
-            padding: 10px;
-            font-size: 14px;
-        }
-    }
-</style>
 @endsection
 
 </html>

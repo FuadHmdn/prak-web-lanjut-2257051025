@@ -56,21 +56,28 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto');
-            $fotoPath = $foto->move(public_path('assets/img'), $foto->getClientOriginalName());
-        } else {
-            $fotoPath = null;
-        }
-
-        $this->userModel->create([
-            'nama' => $request->input('nama'),
-            'npm' => $request->input('npm'),
-            'kelas_id' => $request->input('kelas_id'),
-            'foto' => $fotoPath ? 'assets/img/' . $foto->getClientOriginalName() : null,
+        $request->validate([
+            'nama' => 'required',
+            'npm' => 'required',
+            'kelas_id' => 'required',
+            'foto' => 'image|file|max:2048',
         ]);
 
-        return redirect()->to('/user')->with('success', 'User berhasil ditambahkan');
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $filename = time() . '.' . $request->foto->extension();
+
+            $file->move(public_path('uploads'), $filename);
+
+            $this->userModel->create([
+                'nama' => $request->input('nama'),
+                'npm' => $request->input('npm'),
+                'kelas_id' => $request->input('kelas_id'),
+                'foto' => 'uploads/' . $filename,
+            ]);
+        }
+
+        return redirect()->to('/user')->with('success', 'User Berhasil dibuat');
     }
 
     public function show($id)
