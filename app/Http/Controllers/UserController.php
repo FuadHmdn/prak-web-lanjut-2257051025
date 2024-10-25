@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Http\Requests;
+use App\Models\JurusanModels;
 use App\Models\Kelas;
 use App\Models\UserModel;
 
@@ -44,11 +45,14 @@ class UserController extends Controller
 
     public function create()
     {
-        // $kelasModel = new Kelas();
         $kelas = $this->kelasModel->getKelas();
+        $jurusanModel = new JurusanModels();
+        $jurusan = $jurusanModel->getJurusan();
+
         $data = [
             'title' => 'Create User',
             'kelas' => $kelas,
+            'jurusan' => $jurusan,
         ];
 
         return view('create_user', $data);
@@ -60,22 +64,23 @@ class UserController extends Controller
             'nama' => 'required',
             'npm' => 'required',
             'kelas_id' => 'required',
+            'jurusan_id' => 'required',
             'foto' => 'image|file|max:2048',
         ]);
 
         if ($request->hasFile('foto')) {
             $file = $request->file('foto');
             $filename = time() . '.' . $request->foto->extension();
-
             $file->move(public_path('uploads'), $filename);
-
-            $this->userModel->create([
-                'nama' => $request->input('nama'),
-                'npm' => $request->input('npm'),
-                'kelas_id' => $request->input('kelas_id'),
-                'foto' => 'uploads/' . $filename,
-            ]);
         }
+
+        $this->userModel->create([
+            'nama' => $request->input('nama'),
+            'npm' => $request->input('npm'),
+            'kelas_id' => $request->input('kelas_id'),
+            'jurusan_id' => $request->input('jurusan_id'),
+            'foto' => isset($filename) ? 'uploads/' . $filename : null,
+        ]);
 
         return redirect()->to('/user')->with('success', 'User Berhasil dibuat');
     }
