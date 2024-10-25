@@ -13,9 +13,10 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             color: #ddd;
+            overflow-y: auto;
         }
 
         h1 {
@@ -39,7 +40,9 @@
             font-weight: bold;
         }
 
-        input[type="text"] {
+        input[type="text"],
+        select,
+        input[type="file"] {
             width: 100%;
             padding: 8px;
             margin-bottom: 16px;
@@ -69,7 +72,7 @@
 
 @section('content')
 <div>
-<h1>Buat Profile Anda</h1>
+    <h1>Buat Profile Anda</h1>
     <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <label for="nama">Nama:</label>
@@ -82,6 +85,15 @@
         <input type="text" id="npm" name="npm" value="{{ old('npm') }}" required>
 
         <p class="text-muted">Silahkan masukan NPM anda.</p>
+        <br>
+
+        <label for="jurusan">Jurusan:</label>
+        <select id="jurusan" name="jurusan_id" required>
+            @foreach ($jurusan as $jurusanItem)
+            <option value="{{ $jurusanItem->id }}" {{ old('jurusan_id') == $jurusanItem->id ? 'selected' : '' }}>{{ $jurusanItem->nama_jurusan }}</option> <!-- Ganti nama_kelas dengan nama_jurusan -->
+            @endforeach
+        </select>
+        <p class="text-muted">Silahkan masukan Jurusan anda.</p>
         <br>
 
         <label for="kelas">Kelas:</label>
